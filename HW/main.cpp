@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 using std::cin;
 using std::cout;
 using std::endl;
@@ -52,7 +52,7 @@ public:
 	}
 	void print_distance()const
 	{
-		cout << "Расстояние по координате x: " << x << "\tРасстояние по координате y: " << y << endl;
+		cout << "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РїРѕ РєРѕРѕСЂРґРёРЅР°С‚Рµ x: " << x << "\tР Р°СЃСЃС‚РѕСЏРЅРёРµ РїРѕ РєРѕРѕСЂРґРёРЅР°С‚Рµ y: " << y << endl;
 	}
 	Point distance(Point X)
 	{
