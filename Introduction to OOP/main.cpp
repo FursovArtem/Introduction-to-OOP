@@ -26,7 +26,7 @@ public:
 	}
 
 	// Constructors:
-	Point()
+	/*Point()
 	{
 		x = y = double();
 		cout << "DefaultConstructor:\t" << this << endl;
@@ -36,17 +36,59 @@ public:
 		this->x = x;
 		this->y = double();
 		cout << "1ArgConstructor:\t" << this << endl;
-	}
-	Point(double x, double y)
+	}*/
+	Point(double x = 0, double y = 0)
 	{
 		this->x = x;
 		this->y = y;
 		cout << "Constructor:\t" << this << endl;
 	}
+	Point(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyConstructor:\t" << this << endl;
+	}
 	~Point()
 	{
 
 		cout << "Destructor:\t" << this << endl;
+	}
+
+	// Assignment operator:
+	Point operator=(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyAssignment:\t" << this << endl;
+		return *this;
+	}
+	Point operator+=(const Point& other)
+	{
+		this->x += other.x;
+		this->y += other.y;
+		return *this;
+	}
+
+	// Increment/Decrement:
+	Point operator++() //prefix increment
+	{
+		x++;
+		y++;
+		return *this;
+	}
+	Point operator++(int) // postfix increment
+	{
+		Point old = *this;
+		x++;
+		y++;
+		return old;
+	}
+	Point operator()(double x, double y)
+	{
+		set_x(x);
+		set_y(y);
+		return *this;
 	}
 
 	// Methods:
@@ -56,7 +98,27 @@ public:
 	}
 };
 
-//define STRUCT_POINT
+Point operator+(const Point& left, const Point& right)
+{
+	Point result;
+	result.set_x(left.get_x() + right.get_x());
+	result.set_y(left.get_y() + right.get_y());
+	return result;
+}
+
+bool operator==(const Point& left, const Point& right)
+{
+	return left.get_x() == right.get_x() && left.get_y() == right.get_y();
+}
+
+std::ostream& operator<<(std::ostream& os, const Point& obj)
+{
+	return os << "X = " << obj.get_x() << "\tY = " << obj.get_y();
+}
+
+//#define STRUCT_POINT
+//#define CONSTRUCTORS_CHECK
+//#define ASSIGNMENT_CHECK
 
 void main()
 {
@@ -72,10 +134,46 @@ void main()
 	cout << pA->x << "\t" << pA->y << endl;
 #endif
 
+#ifdef CONSTRUCTORS_CHECK
 	Point A;
 	A.print();
 	Point B = 5;
 	B.print();
 	Point C(2, 3);
 	C.print();
+	Point D = C;
+	D.print();
+	Point E;
+	E = D;
+	E.print();
+#endif
+
+#ifdef ASSIGNMENT_CHECK
+	int a, b, c;
+	a = b = c = 0;
+	cout << a << "\t" << b << "\t" << c << "\t" << endl;
+
+	Point A, B, C;
+	A = B = C = Point(4, 4);
+#endif
+
+	Point A(2, 3);
+	A.print();
+
+	Point B(7, 8);
+	B.print();
+
+	Point C = A + B;
+	C.print();
+
+	A += B;
+	A.print();
+
+	A++;
+	A.print();
+
+	cout << A << endl;
+
+	A(33, 44);
+	A.print();
 }
