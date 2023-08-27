@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 using std::cout;
 using std::endl;
 
@@ -162,12 +162,12 @@ public:
 
 	void print()const
 	{
-		cout << "Целая часть = " << integer << "\tДробная часть = " << numerator << " / " << denominator << endl;
+		cout << "Р¦РµР»Р°СЏ С‡Р°СЃС‚СЊ = " << integer << "\tР”СЂРѕР±РЅР°СЏ С‡Р°СЃС‚СЊ = " << numerator << " / " << denominator << endl;
 	}
 	int gcd(int num_1, int num_2)
 	{
 		// greatest common divisor method
-		// метод НОД
+		// РјРµС‚РѕРґ РќРћР”
 		while (num_1 > 0 && num_2 > 0)
 		{
 			if (num_1 > num_2)
@@ -181,13 +181,15 @@ public:
 		}
 		return num_1 + num_2;
 	}
-	//int lcd(int num_1, int num_2)
-	//{
-	//	// least common divisor method
-	//	// метод НОК
-	//	return num_1 * num_2 / gcd(num_1, num_2);
-	//}
-	fraction correct()		// корректировка целой части (если числитель больше знаменателя)
+	/*
+	int lcd(int num_1, int num_2)
+	{
+		// least common divisor method
+		// РјРµС‚РѕРґ РќРћРљ
+		return num_1 * num_2 / gcd(num_1, num_2);
+	}
+	*/
+	fraction correct()		// РєРѕСЂСЂРµРєС‚РёСЂРѕРІРєР° С†РµР»РѕР№ С‡Р°СЃС‚Рё (РµСЃР»Рё С‡РёСЃР»РёС‚РµР»СЊ Р±РѕР»СЊС€Рµ Р·РЅР°РјРµРЅР°С‚РµР»СЏ)
 	{
 		if (numerator >= 0)
 		{
@@ -209,7 +211,7 @@ public:
 			return *this;
 		}
 	}
-	fraction reduct()		// сокращение дроби по НОД
+	fraction reduct()		// СЃРѕРєСЂР°С‰РµРЅРёРµ РґСЂРѕР±Рё РїРѕ РќРћР”
 	{
 		int gcdiv = gcd(numerator, denominator);
 		numerator /= gcdiv;
@@ -297,7 +299,7 @@ bool operator<=(const fraction& lvalue, const fraction& rvalue)
 }
 std::ostream& operator<<(std::ostream& os, const fraction& obj)
 {
-	return os << "Целая часть = " << obj.get_integer() << "\tДробная часть = " << obj.get_numerator() << " / " << obj.get_denominator();
+	return os << "Р¦РµР»Р°СЏ С‡Р°СЃС‚СЊ = " << obj.get_integer() << "\tР”СЂРѕР±РЅР°СЏ С‡Р°СЃС‚СЊ = " << obj.get_numerator() << " / " << obj.get_denominator();
 }
 
 void main()
