@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+using std::cin;
 using std::cout;
 using std::endl;
 
@@ -119,29 +120,29 @@ public:
 
 	// Increment/Decrement:
 
-	fraction operator++()		// prefix ++
+	fraction& operator++()		// prefix ++
 	{
 		integer++;
 		return *this;
 	}
-	fraction operator++(int)	// postfix ++
+	fraction& operator++(int)	// postfix ++
 	{
 		fraction old = *this;
 		integer++;
 		return old;
 	}
-	fraction operator--()		// prefix --
+	fraction& operator--()		// prefix --
 	{
 		integer--;
 		return *this;
 	}
-	fraction operator--(int)	// postfix --
+	fraction& operator--(int)	// postfix --
 	{
 		fraction old = *this;
 		integer--;
 		return old;
 	}
-	fraction operator-()		// unary -
+	fraction& operator-()		// unary -
 	{
 		integer = -integer;
 		return *this;
@@ -150,7 +151,7 @@ public:
 	{
 		return integer + numerator / (double)denominator;
 	}
-	fraction operator()(int integer, int numerator, int denominator)
+	fraction& operator()(int integer, int numerator, int denominator)
 	{
 		set_integer(integer);
 		set_numerator(numerator);
@@ -301,6 +302,15 @@ std::ostream& operator<<(std::ostream& os, const fraction& obj)
 {
 	return os << "Целая часть = " << obj.get_integer() << "\tДробная часть = " << obj.get_numerator() << " / " << obj.get_denominator();
 }
+std::istream& operator>>(std::istream& in, fraction& obj)
+{
+	int integer, numerator, denominator;
+	in >> integer >> numerator >> denominator;
+	obj.set_integer(integer);
+	obj.set_numerator(numerator);
+	obj.set_denominator(denominator);
+	return in;
+}
 
 void main()
 {
@@ -356,4 +366,8 @@ void main()
 	A(5, 67, 23);
 	cout << (double)A << endl;
 	cout << (fraction)A << endl;
+
+	fraction S;
+	cin >> S;
+	cout << S;
 }
