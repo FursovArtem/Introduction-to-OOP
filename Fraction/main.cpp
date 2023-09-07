@@ -75,7 +75,7 @@ public:
 		this->numerator = numerator;
 		this->denominator = denominator;
 	}
-	fraction(const fraction& other)
+	fraction(const fraction& other)noexcept
 	{
 		// copy
 		this->integer = other.integer;
@@ -91,7 +91,7 @@ public:
 
 	// Assignment operator:
 
-	fraction operator=(const fraction& rvalue)
+	fraction operator=(const fraction& rvalue)noexcept
 	{
 		this->integer = rvalue.integer;
 		this->numerator = rvalue.numerator;
