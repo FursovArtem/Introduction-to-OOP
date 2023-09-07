@@ -14,7 +14,7 @@ void main()
 
 	String str4();	//не создает объект, объявляется функция str4(), 
 	//которая ничего не принимает и возвращает объект класса String
-//str4().print();
+	//str4().print();
 
 	String str5{};	//явно вызывается default constructor
 	str5.print();
