@@ -1,4 +1,5 @@
-﻿#include <iostream>
+﻿#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
 using std::cin;
 using std::cout;
 using std::endl;
@@ -36,10 +37,40 @@ public:
 	}
 
 	// Constructors:
-
-	fraction(int integer = 0, int numerator = 0, int denominator = 1)
+	fraction()
 	{
-		// default
+		// default constructor
+		this->integer = 0;
+		this->numerator = 0;
+		this->denominator = 1;
+	}
+	fraction(int integer)
+	{
+		// 1-arg constructor
+		this->integer = integer;
+		this->numerator = 0;
+		this->denominator = 1;
+	}
+	fraction(double decimal)
+	{
+		// from double constructor
+		decimal += 1e-10;
+		integer = decimal;
+		decimal -= integer;
+		denominator = 1e+9;
+		numerator = decimal * denominator;
+		correct().reduct();
+	}
+	fraction(int numerator, int denominator)
+	{
+		// 2-arg constructor
+		this->integer = 0;
+		this->numerator = numerator;
+		this->denominator = denominator;
+	}
+	fraction(int integer, int numerator, int denominator)
+	{
+		// 3-arg constructor
 		this->integer = integer;
 		this->numerator = numerator;
 		this->denominator = denominator;
@@ -51,7 +82,6 @@ public:
 		this->numerator = other.numerator;
 		this->denominator = other.denominator;
 	}
-
 	// ~Destructor:
 
 	~fraction()
@@ -77,8 +107,7 @@ public:
 			(rvalue.integer * rvalue.denominator + rvalue.numerator) * this->denominator
 			);
 		temp.denominator = this->denominator * rvalue.denominator;
-		temp.correct();
-		temp.reduct();
+		temp.correct().reduct();
 		return *this = temp;
 	}
 	fraction operator-=(const fraction& rvalue)
@@ -90,8 +119,7 @@ public:
 			(rvalue.integer * rvalue.denominator + rvalue.numerator) * this->denominator
 			);
 		temp.denominator = this->denominator * rvalue.denominator;
-		temp.correct();
-		temp.reduct();
+		temp.correct().reduct();
 		return *this = temp;
 	}
 	fraction operator*=(const fraction& rvalue)
@@ -103,8 +131,7 @@ public:
 			(rvalue.integer * rvalue.denominator + rvalue.numerator)
 			);
 		temp.denominator = this->denominator * rvalue.denominator;
-		temp.correct();
-		temp.reduct();
+		temp.correct().reduct();
 		return *this = temp;
 	}
 	fraction operator/=(const fraction& rvalue)
@@ -147,16 +174,22 @@ public:
 		integer = -integer;
 		return *this;
 	}
-	operator double()const		// conversion
-	{
-		return integer + numerator / (double)denominator;
-	}
 	fraction& operator()(int integer, int numerator, int denominator)
 	{
 		set_integer(integer);
 		set_numerator(numerator);
 		set_denominator(denominator);
 		return *this;
+	}
+
+	// Type-cast:
+	operator int()
+	{
+		return correct().integer;
+	}
+	operator double()
+	{
+		return integer + numerator / (double)denominator;
 	}
 
 	// Methods:
@@ -190,7 +223,7 @@ public:
 		return num_1 * num_2 / gcd(num_1, num_2);
 	}
 	*/
-	fraction correct()		// корректировка целой части (если числитель больше знаменателя)
+	fraction& correct()		// корректировка целой части (если числитель больше знаменателя)
 	{
 		if (numerator >= 0)
 		{
@@ -212,7 +245,7 @@ public:
 			return *this;
 		}
 	}
-	fraction reduct()		// сокращение дроби по НОД
+	fraction& reduct()		// сокращение дроби по НОД
 	{
 		int gcdiv = gcd(numerator, denominator);
 		numerator /= gcdiv;
@@ -302,20 +335,38 @@ std::ostream& operator<<(std::ostream& os, const fraction& obj)
 {
 	return os << "Целая часть = " << obj.get_integer() << "\tДробная часть = " << obj.get_numerator() << " / " << obj.get_denominator();
 }
-std::istream& operator>>(std::istream& in, fraction& obj)
+std::istream& operator>>(std::istream& is, fraction& obj)
 {
-	int integer, numerator, denominator;
-	in >> integer >> numerator >> denominator;
+	/*int integer, numerator, denominator;
+	is >> integer >> numerator >> denominator;
 	obj.set_integer(integer);
 	obj.set_numerator(numerator);
-	obj.set_denominator(denominator);
-	return in;
+	obj.set_denominator(denominator);*/
+	const int size = 256;
+	char sz_buffer[size]{};
+	is >> sz_buffer;
+	int number[3] = {};
+	int n = 0;
+	char delimiters[] = "()/";
+	
+	for (char* pch = strtok(sz_buffer, delimiters); pch; pch = strtok(NULL, delimiters))
+	{
+		number[n++] = std::atoi(pch); //atoi - ascii-string to integer
+	}
+
+	switch (n)
+	{
+	case 1: obj = fraction(number[0]); break;
+	case 2: obj = fraction(number[0], number[1]); break;
+	case 3: obj = fraction(number[0], number[1], number[2]);
+	}
+	return is;
 }
 
 void main()
 {
 	setlocale(LC_ALL, "");
-	fraction A(0, 21, 6);
+	/*fraction A(0, 21, 6);
 	fraction B(5, 13, 7);
 	A.print();
 	B.print();
@@ -369,5 +420,8 @@ void main()
 
 	fraction S;
 	cin >> S;
-	cout << S;
+	cout << S << endl;*/
+
+	fraction A = 2.76;
+	cout << A << endl;
 }
