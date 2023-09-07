@@ -1,7 +1,6 @@
-﻿
+﻿#include "fraction.h"
 
 #define delimiter "\n--------------------------------------------------------------\n"
-#include "fraction.h"
 
 void main()
 {

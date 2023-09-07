@@ -5,6 +5,20 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+class fraction;
+fraction operator+(const fraction& lvalue, const fraction& rvalue);
+fraction operator-(const fraction& lvalue, const fraction& rvalue);
+fraction operator*(const fraction& lvalue, const fraction& rvalue);
+fraction operator/(const fraction& lvalue, const fraction& rvalue);
+bool operator==(const fraction& lvalue, const fraction& rvalue);
+bool operator!=(const fraction& lvalue, const fraction& rvalue);
+bool operator>(const fraction& lvalue, const fraction& rvalue);
+bool operator<(const fraction& lvalue, const fraction& rvalue);
+bool operator>=(const fraction& lvalue, const fraction& rvalue);
+bool operator<=(const fraction& lvalue, const fraction& rvalue);
+std::ostream& operator<<(std::ostream& os, const fraction& obj);
+std::istream& operator>>(std::istream& is, fraction& obj);
+
 class fraction
 {
 private:
