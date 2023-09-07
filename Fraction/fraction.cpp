@@ -89,49 +89,19 @@ fraction fraction::operator=(const fraction& rvalue)
 }
 fraction fraction::operator+=(const fraction& rvalue)
 {
-	fraction temp;
-	temp.integer = 0;
-	temp.numerator = (
-		(this->integer * this->denominator + this->numerator) * rvalue.denominator +
-		(rvalue.integer * rvalue.denominator + rvalue.numerator) * this->denominator
-		);
-	temp.denominator = this->denominator * rvalue.denominator;
-	temp.correct().reduct();
-	return *this = temp;
+	return *this = (*this + rvalue);
 }
 fraction fraction::operator-=(const fraction& rvalue)
 {
-	fraction temp;
-	temp.integer = 0;
-	temp.numerator = (
-		(this->integer * this->denominator + this->numerator) * rvalue.denominator -
-		(rvalue.integer * rvalue.denominator + rvalue.numerator) * this->denominator
-		);
-	temp.denominator = this->denominator * rvalue.denominator;
-	temp.correct().reduct();
-	return *this = temp;
+	return *this = (*this - rvalue);
 }
 fraction fraction::operator*=(const fraction& rvalue)
 {
-	fraction temp;
-	temp.integer = 0;
-	temp.numerator = (
-		(this->integer * this->denominator + this->numerator) *
-		(rvalue.integer * rvalue.denominator + rvalue.numerator)
-		);
-	temp.denominator = this->denominator * rvalue.denominator;
-	temp.correct().reduct();
-	return *this = temp;
+	return *this = (*this * rvalue);
 }
 fraction fraction::operator/=(const fraction& rvalue)
 {
-	fraction temp;
-	temp.integer = 0;
-	temp.numerator = (this->integer * this->denominator + this->numerator) * rvalue.denominator;
-	temp.denominator = (rvalue.integer * rvalue.denominator + rvalue.numerator) * this->denominator;
-	temp.correct();
-	temp.reduct();
-	return *this = temp;
+	return *this = (*this / rvalue);
 }
 
 // Increment/Decrement:

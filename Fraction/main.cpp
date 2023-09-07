@@ -47,7 +47,7 @@ void main()
 
 	cout << A(1, 2, 3) << endl;
 	cout << A(0, 21, 6) << endl;
-	A -= B;
+	A -= E;
 	A.print();
 	cout << delimiter;
 
