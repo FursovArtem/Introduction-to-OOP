@@ -25,30 +25,30 @@ public:
 	}
 	// Constructors:
 
-	explicit String(int size = 80)
+	explicit String(int size = 80) : size(size), str(new char[size] {})
 	{
 		// default
-		this->size = size;
-		this->str = new char[size] {};
+		//this->size = size;
+		//this->str = new char[size] {};
 	}
-	String(const char* str)
+	String(const char* str) : size(strlen(str) + 1), str(new char[size] {})
 	{
-		this->size = strlen(str) + 1;
-		this->str = new char[size] {};
+		//this->size = strlen(str) + 1;
+		//this->str = new char[size] {};
 		for (int i = 0; str[i]; i++)this->str[i] = str[i];
 	}
-	String(const String& other)
+	String(const String& other) : size(other.size), str(new char[size] {})
 	{
 		//Deep copy
-		this->size = other.size;
-		this->str = new char[size] {};
+		//this->size = other.size;
+		//this->str = new char[size] {};
 		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
 	}
-	String(String&& other)
+	String(String&& other) : size(other.size), str(other.str)
 	{
 		//Shallow copy
-		this->size = other.size;
-		this->str = other.str;
+		//this->size = other.size;
+		//this->str = other.str;
 		other.size = 0;
 		other.str = nullptr;
 	}
@@ -114,8 +114,34 @@ std::ostream& operator <<(std::ostream& os, const String& obj)
 void main()
 {
 	setlocale(LC_ALL, "");
-	String str1 = "Hello";
-	String str2 = "World";
-	str1 += str2;
-	cout << str1 << endl;
+	String str1;	//Default constructor
+	str1.print();
+
+	String str2(5);	//1-arg constructor
+	str2.print();
+
+	String str3("Hello"); //1-arg constructor
+	str3.print();
+
+	String str4();	//не создает объект, объявляется функция str4(), 
+	//которая ничего не принимает и возвращает объект класса String
+//str4().print();
+
+	String str5{};	//явно вызывается default constructor
+	str5.print();
+
+	String str6("World");
+	str6.print();
+
+	String str7{ "Compile" };
+	str7.print();
+
+	String str8 = str3; //Copy constructor
+	str8.print();
+
+	String str9;
+	str9 = str6;
+	str9.print();
+
+
 }
