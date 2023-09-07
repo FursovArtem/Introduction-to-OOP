@@ -78,7 +78,7 @@ public:
 	}
 	String& operator+=(const String& rvalue)
 	{
-		return *this += rvalue;
+		return *this = this->str + rvalue;
 	}
 
 	char operator[](int i)const
