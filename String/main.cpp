@@ -37,7 +37,7 @@ public:
 		//this->str = new char[size] {};
 		for (int i = 0; str[i]; i++)this->str[i] = str[i];
 	}
-	String(const String& other) : String(other.str)
+	String(const String& other)noexcept : String(other.str)
 	{
 		//Deep copy
 		//this->size = other.size;
@@ -59,7 +59,7 @@ public:
 
 	// Operators:
 
-	String& operator=(const String& other)
+	String& operator=(const String& other)noexcept
 	{
 		if (this == &other)return *this;
 		delete[] this->str;
