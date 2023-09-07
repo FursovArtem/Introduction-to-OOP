@@ -3,6 +3,9 @@
 using std::cout;
 using std::endl;
 
+class String;
+String operator+(const String& lvalue, const String& rvalue);
+
 class String
 {
 private:

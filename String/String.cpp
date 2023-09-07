@@ -1,5 +1,4 @@
 #include "String.h"
-String operator+(const String& lvalue, const String& rvalue);
 
 int String::get_size()const
 {
