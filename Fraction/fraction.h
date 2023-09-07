@@ -39,14 +39,14 @@ public:
 	fraction(double decimal);
 	fraction(int numerator, int denominator);
 	fraction(int integer, int numerator, int denominator);
-	fraction(const fraction& other);
+	fraction(const fraction& other)noexcept;
 	// ~Destructor:
 
 	~fraction();
 
 	// Assignment operator:
 
-	fraction operator=(const fraction& rvalue);
+	fraction operator=(const fraction& rvalue)noexcept;
 	fraction operator+=(const fraction& rvalue);
 	fraction operator-=(const fraction& rvalue);
 	fraction operator*=(const fraction& rvalue);

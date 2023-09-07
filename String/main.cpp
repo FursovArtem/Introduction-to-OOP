@@ -37,14 +37,14 @@ public:
 		this->str = new char[size] {};
 		for (int i = 0; str[i]; i++)this->str[i] = str[i];
 	}
-	String(const String& other)
+	String(const String& other)noexcept
 	{
 		//Deep copy
 		this->size = other.size;
 		this->str = new char[size] {};
 		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
 	}
-	String(String&& other)
+	String(String&& other)noexcept
 	{
 		//Shallow copy
 		this->size = other.size;
@@ -59,7 +59,7 @@ public:
 
 	// Operators:
 
-	String& operator=(const String& other)
+	String& operator=(const String& other)noexcept
 	{
 		if (this == &other)return *this;
 		delete[] this->str;
@@ -68,7 +68,7 @@ public:
 		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
 		return *this;
 	}
-	String& operator=(String&& other)
+	String& operator=(String&& other)noexcept
 	{
 		if (this == &other) return *this;
 		this->size = other.size;

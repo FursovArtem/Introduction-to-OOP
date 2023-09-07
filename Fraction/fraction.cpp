@@ -64,7 +64,7 @@ fraction::fraction(int integer, int numerator, int denominator)
 	this->numerator = numerator;
 	this->denominator = denominator;
 }
-fraction::fraction(const fraction& other)
+fraction::fraction(const fraction& other)noexcept
 {
 	// copy
 	this->integer = other.integer;
@@ -80,7 +80,7 @@ fraction::~fraction()
 
 // Assignment operator:
 
-fraction fraction::operator=(const fraction& rvalue)
+fraction fraction::operator=(const fraction& rvalue)noexcept
 {
 	this->integer = rvalue.integer;
 	this->numerator = rvalue.numerator;
