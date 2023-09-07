@@ -348,7 +348,7 @@ std::istream& operator>>(std::istream& is, fraction& obj)
 	int number[3] = {};
 	int n = 0;
 	char delimiters[] = "()/";
-	
+
 	for (char* pch = strtok(sz_buffer, delimiters); pch; pch = strtok(NULL, delimiters))
 	{
 		number[n++] = std::atoi(pch); //atoi - ascii-string to integer
@@ -366,7 +366,7 @@ std::istream& operator>>(std::istream& is, fraction& obj)
 void main()
 {
 	setlocale(LC_ALL, "");
-	/*fraction A(0, 21, 6);
+	fraction A(0, 21, 6);
 	fraction B(5, 13, 7);
 	A.print();
 	B.print();
@@ -420,8 +420,8 @@ void main()
 
 	fraction S;
 	cin >> S;
-	cout << S << endl;*/
+	cout << S << endl;
 
-	fraction A = 2.76;
-	cout << A << endl;
+	fraction X = 2.76;
+	cout << X << endl;
 }
