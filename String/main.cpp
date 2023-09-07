@@ -11,93 +11,118 @@ private:
 	int size;
 	char* str;
 public:
-	const char* get_str()const
-	{
-		return str;
-	}
-	char* get_str()
-	{
-		return str;
-	}
-	int get_size()const
-	{
-		return size;
-	}
+	int get_size()const;
+	const char* get_str()const;
+	char* get_str();
 	// Constructors:
 
-	explicit String(int size = 80) : size(size), str(new char[size] {})
-	{
-		// default
-		//this->size = size;
-		//this->str = new char[size] {};
-	}
-	String(const char* str) : String(strlen(str) + 1)
-	{
-		//this->size = strlen(str) + 1;
-		//this->str = new char[size] {};
-		for (int i = 0; str[i]; i++)this->str[i] = str[i];
-	}
-	String(const String& other)noexcept : String(other.str)
-	{
-		//Deep copy
-		//this->size = other.size;
-		//this->str = new char[size] {};
-		//for (int i = 0; i < size; i++)this->str[i] = other.str[i];
-	}
-	String(String&& other)noexcept : size(other.size), str(other.str)
-	{
-		//Shallow copy
-		//this->size = other.size;
-		//this->str = other.str;
-		other.size = 0;
-		other.str = nullptr;
-	}
-	~String()
-	{
-		delete[] str;
-	}
+	explicit String(int size = 80);
+	String(const char* str);
+	String(const String& other)noexcept;
+	String(String&& other)noexcept;
+	~String();
 
 	// Operators:
 
-	String& operator=(const String& other)noexcept
-	{
-		if (this == &other)return *this;
-		delete[] this->str;
-		this->size = other.size;
-		this->str = new char[size] {};
-		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
-		return *this;
-	}
-	String& operator=(String&& other)noexcept
-	{
-		if (this == &other) return *this;
-		this->size = other.size;
-		this->str = other.str;
-		other.size = 0;
-		other.str = nullptr;
-	}
-	String& operator+=(const String& rvalue)
-	{
-		return *this = this->str + rvalue;
-	}
+	String& operator=(const String& other)noexcept;
+	String& operator=(String&& other)noexcept;
+	String& operator+=(const String& rvalue);
 
-	char operator[](int i)const
-	{
-		return str[i];
-	}
-	char& operator[](int i)
-	{
-		return str[i];
-	}
+	char operator[](int i)const;
+	char& operator[](int i);
 
 	// Methods:
 
-	void print()const
-	{
-		cout << "Size:\t" << size << endl;
-		cout << "Str:\t" << str << endl;
-	}
+	void print()const;
 };
+
+int String::get_size()const
+{
+	return size;
+}
+const char* String::get_str()const
+{
+	return str;
+}
+char* String::get_str()
+{
+	return str;
+}
+// Constructors:
+
+// ключевое слово explicit можно писать только внутри класса
+String::String(int size) : size(size), str(new char[size] {})
+{
+	// default
+	//this->size = size;
+	//this->str = new char[size] {};
+}
+String::String(const char* str) : String(strlen(str) + 1)
+{
+	//this->size = strlen(str) + 1;
+	//this->str = new char[size] {};
+	for (int i = 0; str[i]; i++)this->str[i] = str[i];
+}
+String::String(const String& other)noexcept : String(other.str)
+{
+	//Deep copy
+	//this->size = other.size;
+	//this->str = new char[size] {};
+	//for (int i = 0; i < size; i++)this->str[i] = other.str[i];
+}
+String::String(String&& other)noexcept : size(other.size), str(other.str)
+{
+	//Shallow copy
+	//this->size = other.size;
+	//this->str = other.str;
+	other.size = 0;
+	other.str = nullptr;
+}
+String::~String()
+{
+	delete[] str;
+}
+
+// Operators:
+
+String& String::operator=(const String& other)noexcept
+{
+	if (this == &other)return *this;
+	delete[] this->str;
+	this->size = other.size;
+	this->str = new char[size] {};
+	for (int i = 0; i < size; i++)this->str[i] = other.str[i];
+	return *this;
+}
+String& String::operator=(String&& other)noexcept
+{
+	if (this == &other) return *this;
+	this->size = other.size;
+	this->str = other.str;
+	other.size = 0;
+	other.str = nullptr;
+}
+String& String::operator+=(const String& rvalue)
+{
+	return *this = this->str + rvalue;
+}
+
+char String::operator[](int i)const
+{
+	return str[i];
+}
+char& String::operator[](int i)
+{
+	return str[i];
+}
+
+// Methods:
+
+void String::print()const
+{
+	cout << "Size:\t" << size << endl;
+	cout << "Str:\t" << str << endl;
+}
 
 String operator+(const String& lvalue, const String& rvalue)
 {
@@ -142,6 +167,4 @@ void main()
 	String str9;
 	str9 = str6;
 	str9.print();
-
-
 }
